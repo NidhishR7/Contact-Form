@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Contact me </title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="container">
+        <div class="text">Contact me </div>
+        <form action="#">
+            <div class="form-row">
+                <div class="input-data">
+                    <input type="text" id="username" required>
+                    <div class="underline"></div>
+                    <label for="">Name</label>
+                </div>
+                
+            </div>
+            <div class="form-row">
+                <div class="input-data">
+                    <input type="email" required id="email">
+                    <div class="underline"></div>
+                    <label for="">Email Address</label>
+                </div>
+                
+                <div class="form-row">
+                    <div class="input-data">
+                        <input type="text" required id="phone">
+                        <div class="underline"></div>
+                        <label for="">Phone Number</label>
+                    </div>
+                    </div>
+             
+            </div>
+            <div class="form-row">
+                <div class="input-data textarea">
+                    <textarea rows="8" cols="80" required id="msg"></textarea>
+                    <br />
+                    <div class="underline"></div>
+                    <label for="">Write your message</label>
+                    <br />
+                    <div class="form-row submit-btn">
+                        <div class="input-data">
+                            <div class="inner"></div>
+                            <input type="submit" id="submit" value="submit">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script type="module">
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+        import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAWVJWQh9jSfuEDRtCezIKBTAt88tSlFSE",
+            authDomain: "login-c0db9.firebaseapp.com",
+            projectId: "login-c0db9",
+            storageBucket: "login-c0db9.appspot.com",
+            messagingSenderId: "175909988167",
+            appId: "1:175909988167:web:3f7602f942245cacf08e62"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        const db = getDatabase(app);
+
+        document.getElementById("submit").addEventListener('click', function (e) {
+            e.preventDefault();
+            set(ref(db, 'user/' + document.getElementById("username").value),
+                {
+                    username: document.getElementById("username").value,
+                    email: document.getElementById("email").value,
+                    PhoneNumber: document.getElementById("phone").value,
+                    Message: document.getElementById("msg").value
+                });
+            alert("Sent Sucessfully")
+        })
+    </script>
+</body>
+
+</html>
